@@ -5,8 +5,8 @@ const CACHE_NAME = 'lab-7-starter';
 
 const urlsToCache = [
     '/',
-    '/styles/main.css',
-    '/script/main.js'
+    '/assets/styles/main.css',
+    '/assets/scripts/main.js'
   ];
   
 // Once the service worker has been installed, feed it some initial URLs to cache
@@ -34,17 +34,7 @@ self.addEventListener('activate', function (event) {
    * TODO - Part 2 Step 3
    * Create a function as outlined above, it should be one line
    */
-   event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
+   event.waitUntil(clients.claim());
 });
 
 // Intercept fetch requests and store them in the cache
@@ -60,32 +50,8 @@ self.addEventListener('fetch', function (event) {
         if (response) {
           return response;
         }
-
-        return fetch(event.request).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have two streams.
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-    );
-});
-
-self.addEventListener('activate', event => {
-    event.waitUntil(clients.claim());
+        return fetch(event.request);
+      }
+    )
+  );
 });
