@@ -230,7 +230,7 @@ class RecipeExpand extends HTMLElement {
     if (ratingVal) {
       rating.innerHTML = 
       `
-      <img src="assets/images/icons/${numStars}-star.svg" alt="${numStars} stars">
+      <img src="Lab7_Starter/assets/images/icons/${numStars}-star.svg" alt="${numStars} stars">
       <span>${ratingVal}</span>
       from`
       ;
