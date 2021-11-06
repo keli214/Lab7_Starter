@@ -57,16 +57,16 @@ function initializeServiceWorker() {
    *  TODO - Part 2 Step 1
    *  Initialize the service worker set up in sw.js
    */
-    if('serviceWOrker' in navigator){
-        window.addEventListener('load',function() {
-            this.navigator.serviceWorker.register('/sw.js').then(function(registration){
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            },function(err){
-                console.log('SeriviceWorker registration failed:', err);
-            });
 
-        });
-    }
+   if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+    .then(function(registration) {
+      console.log('Registration successful, scope is:', registration.scope);
+    })
+    .catch(function(error) {
+      console.log('Service worker registration failed, error:', error);
+    });
+  }
 
 }
 

@@ -15,15 +15,14 @@ self.addEventListener('install', function (event) {
    * TODO - Part 2 Step 2
    * Create a function as outlined above
    */
-  event.waitUnitl(
-      caches.open(CACHE_Name)
-        .then(function(cache){
-            console.log('Opened cache');
-            return cache.addAll(urlsToCache);
-        })
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
   );
 });
-
 
 /**
  * Once the service worker 'activates', this makes it so clients loaded
