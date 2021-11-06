@@ -228,11 +228,12 @@ class RecipeExpand extends HTMLElement {
     const rating = this.shadowRoot.querySelector('.rating--wrapper');
     const numStars = Math.round(ratingVal);
     if (ratingVal) {
-      rating.innerHTML = `
+      rating.innerHTML = 
+      `
       <img src="assets/images/icons/${numStars}-star.svg" alt="${numStars} stars">
       <span>${ratingVal}</span>
-      from
-      `;
+      from`
+      ;
       if (!ratingTotal) {
         ratingTotal = 'some';
       }
